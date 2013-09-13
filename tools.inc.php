@@ -51,8 +51,8 @@ function print_header($lang,$title)
 function print_footer($text)
 {
  echo('<hr />
-  <div style="float:left;font-size:70%;">'.$text.'
-  <a href="/">Powered by Wikimedia Tool Labs</a>
+  <div style="float:left;font-size:70%;">'.$text.'</div>
+  <a href="https://tools.wmflabs.org"><img style="float:right;" id="poweredbyicon" src="/stimmberechtigung/powered-by-labs.png" title="Powered by Wikimedia Tool Labs" /></a>
   </div>
 </body>
 </html>
