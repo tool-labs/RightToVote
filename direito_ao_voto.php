@@ -53,7 +53,7 @@ function verifyUserEditCount($user,$start,$end,$allNS,$required)
 {
   global $database;
   $query = $database->prepare('select count(1) as num from ('.
-                              'select rev_id from revision join page on (page_id = rev_page) '.
+                              'select rev_id from revision_userindex join page on (page_id = rev_page) '.
                               'where '.
                               ($allNS ? '' : 'page_namespace=0 and ').
                               'rev_user=? and rev_timestamp between ? and ? '.
@@ -69,7 +69,7 @@ function verifyUserEditCount($user,$start,$end,$allNS,$required)
 function getFirstEdit($user)
 {
   global $database;
-  $query = $database->prepare('select rev_timestamp from revision '.
+  $query = $database->prepare('select rev_timestamp from revision_userindex '.
                               'where rev_user=? '.
                               'ORDER BY rev_timestamp ASC LIMIT 1');
   $query->execute(array($user));
