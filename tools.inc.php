@@ -36,10 +36,10 @@ function getVar($name,$default=null)
 
 function print_header($lang,$title)
 {
- echo('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="'.$lang.'" xml:lang="'.$lang.'">
+ echo('<!DOCTYPE html>
+<html lang="'.$lang.'">
 <head>
- <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta charset="UTF-8" />
  <title>'.$title.'</title></head><body>
  <link rel="stylesheet" type="text/css" href="/stimmberechtigung/style.css" />
 </head>

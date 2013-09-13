@@ -40,14 +40,14 @@ function printForm()
       <label>Jahr:&nbsp;<input type="text" name="year" value="'.getVar('year', date('Y')).'" size="4" maxlength="4" /></label>&nbsp;
       <label>Uhrzeit:&nbsp;<input type="text" name="hour" value="'.getVar('hour', date('H')).'" size="2" maxlegth="2" />&nbsp;:&nbsp;
                            <input type="text" name="min" value="'.getVar('min', date('i')).'" size="2" maxlength="2" /></label></p>
-   <p style="font-size:smaller;">Bitte die Uhrzeit als <a href="http://de.wikipedia.org/wiki/Koordinierte_Weltzeit">koordinierte Weltzeit (UTC)</a> eintragen. 
+   <p style="font-size:smaller;">Bitte die Uhrzeit als <a href="https://de.wikipedia.org/wiki/Koordinierte_Weltzeit">koordinierte Weltzeit (UTC)</a> eintragen. 
      UTC ist hierbei im Sommer (MESZ / CEST) 2, im Winter (MEZ / CET) 1 Stunde zurück.<br />
      &nbsp;<br />
      Sollte dieses Stimmberechtigungstool in eine Seite in der Wikipedia eingebunden werden, muss ebenfalls auf die 
      UTC-Angabe geachtet werden. Empfehlenswert ist es, dort folgenden Kommentar hinter dem Tool einzubauen, damit 
      die Zeit nicht wieder in MEZ oder MESZ geändert wird:<br />
      &nbsp;<br />
-     &lt;!-- Die Angabe der Uhrzeit beim Tool ist als "UTC" einzutragen (UTC entspricht MEZ - 1 Stunde bzw. MESZ - 2 Stunden). --&gt;
+     &lt;!-- Die Angabe der Uhrzeit beim Tool ist als „UTC“ einzutragen (UTC entspricht MEZ - 1 Stunde bzw. MESZ - 2 Stunden). --&gt;
    </p>
    <p><input type="submit" value="Überprüfen" /></p>
   </form>';
@@ -123,9 +123,9 @@ function printResults($forBot,$date,$signup,$firstEdit,$ArbCom,$Admin,$AdminRece
     echo('Allgemeine Stimmberechtigung: '.(sizeof($reasons) ? 'Nein' : 'Ja')."\r\n");
   } else {
     if ($newSB)
-      oneResult('Allgemeine Stimmberechtigung <a href="http://de.wikipedia.org/w/index.php?title=Wikipedia:Stimmberechtigung&oldid=69822923#Allgemeine_Stimmberechtigung">(neu)</a>', $reasons);
+      oneResult('Allgemeine Stimmberechtigung <a href="https://de.wikipedia.org/w/index.php?title=Wikipedia:Stimmberechtigung&oldid=69822923#Allgemeine_Stimmberechtigung">(neu)</a>', $reasons);
     else
-      oneResult('Allgemeine Stimmberechtigung <a href="http://de.wikipedia.org/w/index.php?title=Wikipedia:Stimmberechtigung&oldid=75178547#Allgemeine_Stimmberechtigung">(alt)</a>', $reasons);
+      oneResult('Allgemeine Stimmberechtigung <a href="https://de.wikipedia.org/w/index.php?title=Wikipedia:Stimmberechtigung&oldid=75178547#Allgemeine_Stimmberechtigung">(alt)</a>', $reasons);
     echo("<!-- ".$Admin." edits / ".$AdminRecent." current edits -->\n");
   }
 
@@ -217,7 +217,7 @@ if (!empty($user))
   <hr/>
   <p>
    <div style="font-size:130%;font-weight:bold;">
-    <a href="http://de.wikipedia.org/wiki/Benutzer:'.htmlspecialchars($user).'">[[Benutzer:'.htmlspecialchars($user).']]</a> 
+    <a href="https://de.wikipedia.org/wiki/Benutzer:'.htmlspecialchars($user).'">[[Benutzer:'.htmlspecialchars($user).']]</a> 
     <a style="font-size:70%;display:none;" href="http://tools.wikimedia.de/~soxred93/count/index.php?name='.htmlspecialchars($user).'&lang=de&wiki=wikipedia">(detaillierter Editcount)</a>
    </div>
    <hr />
