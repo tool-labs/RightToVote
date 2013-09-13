@@ -4,17 +4,14 @@ function buildMysqlString($lang,$needUser)
 {
   switch($lang)
   {
-    case "toolserver":
-    case "TS":         return 'mysql:host=sql-toolserver;dbname=toolserver';
-    default:           return 'mysql:host='.$lang.'wiki-p.'.
-                              ($needUser ? 'userdb' : 'rrdb').
-                              '.toolserver.org;dbname='.$lang.'wiki_p';
+    default:           return 'mysql:host='.$lang.'wiki.labsdb'.
+                              ';dbname='.$lang.'wiki_p';
   }
 }
 
 function connectDB($lang='de',$needUser = false)
 {
-  $settings = parse_ini_file('/home/project/s/t/i/stimmberechtigung/.my.cnf');
+  $settings = parse_ini_file('/data/project/stimmberechtigung/replica.my.cnf');
 
   try
   {
@@ -44,7 +41,7 @@ function print_header($lang,$title)
 <head>
  <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <title>'.$title.'</title></head><body>
- <link rel="stylesheet" type="text/css" href="/~stimmberechtigung/style.css" />
+ <link rel="stylesheet" type="text/css" href="/stimmberechtigung/style.css" />
 </head>
 <body>
 ');
@@ -53,8 +50,9 @@ function print_header($lang,$title)
 function print_footer($text)
 {
  echo('<hr />
-  <div style="float:left;font-size:70%;">'.$text.'</div>
-  <a href="/"><img style="float:right;" id="poweredbyicon" src="/~stimmberechtigung/ts_button.png" alt="Powered by Wikimedia-Toolserver" /></a>
+  <div style="float:left;font-size:70%;">'.$text.'
+  <a href="/">Powered by Wikimedia Tool Labs</a>
+  </div>
 </body>
 </html>
 ');

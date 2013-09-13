@@ -233,7 +233,7 @@ if (!empty($user))
 if (!$forBot)
 {
   echo('</p>');
-  print_footer('Modifiziert von <a href="http://de.wikipedia.org/wiki/Benutzer:Guandalug">Guandalug</a> und <a href="http://de.wikipedia.org/wiki/Benutzer:Ireas">ireas</a> nach einem Skript von <a href="http://tools.wikimedia.de/~gunther/">Gunther</a>. Veröffentlicht unter der <a href="http://www.opensource.org/licenses/mit-license.php">MIT-Lizenz</a>.');
+  print_footer('Modifiziert von <a href="http://de.wikipedia.org/wiki/Benutzer:Guandalug">Guandalug</a> und <a href="http://de.wikipedia.org/wiki/Benutzer:Ireas">ireas</a> nach einem Skript von <a href="http://tools.wikimedia.de/~gunther/">Gunther</a>. Veröffentlicht unter der <a href="http://www.opensource.org/licenses/mit-license.php">MIT-Lizenz</a> auf <a href="https://github.com/tool-labs/stimmberechtigung">GitHub</a>.');
 }
 ?>
 
