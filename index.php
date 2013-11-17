@@ -59,7 +59,7 @@ function getUserData($name)
   $query = $database->prepare('select user_id,user_registration,group_concat(ug_group) as groups '.
                               'from user join user_groups on (ug_user = user_id) '.
                               'where user_name = ?');
-  $query->execute(array($name));
+  $query->execute(array(htmlspecialchars_decode($name)));
   return $query->fetch();
 }
 
@@ -202,7 +202,7 @@ if (!empty($user))
   } else if (strpos($udata['groups'],'bot') !== false) {
     if (!$forBot)
     {
-      echo('<p style="font-weigt:bold;">Benutzer "'.htmlspecialchars($user).'" ist ein Bot und damit nicht stimmberechtigt.</p>
+      echo('<p style="font-weigt:bold;">Benutzer "'.$user.'" ist ein Bot und damit nicht stimmberechtigt.</p>
 </body>
 </html>');
     } else {
@@ -217,8 +217,8 @@ if (!empty($user))
   <hr/>
   <p>
    <div style="font-size:130%;font-weight:bold;">
-    <a href="https://de.wikipedia.org/wiki/Benutzer:'.htmlspecialchars($user).'">[[Benutzer:'.htmlspecialchars($user).']]</a> 
-    <a style="font-size:70%;display:none;" href="http://tools.wikimedia.de/~soxred93/count/index.php?name='.htmlspecialchars($user).'&lang=de&wiki=wikipedia">(detaillierter Editcount)</a>
+    <a href="https://de.wikipedia.org/wiki/Benutzer:'.$user.'">[[Benutzer:'.$user.']]</a> 
+    <a style="font-size:70%;display:none;" href="http://tools.wikimedia.de/~soxred93/count/index.php?name='.$user.'&lang=de&wiki=wikipedia">(detaillierter Editcount)</a>
    </div>
    <hr />
 ';
