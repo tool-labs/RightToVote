@@ -3,6 +3,7 @@
 import datetime
 from dateutil.relativedelta import relativedelta
 import json
+import pytz
 import urllib
 import urllib2
 
@@ -14,10 +15,13 @@ class RightToVote():
     def get_user_name(self):
         pass
 
+    def get_user_id(self):
+        pass
+
     def get_registration(self):
         pass
 
-    def get_contrib_count(self, limit, namespaces=[], start=None, end=None):
+    def get_contrib_count(self, limit, namespaces=[], time=None, delta=None):
         pass
 
     def check_ruleset(self, ruleset, base_datetime=datetime.datetime.now()):
@@ -42,11 +46,9 @@ class RightToVote():
 
         if 'recent_edits' in ruleset and 'recent_time' in ruleset:
             limit = ruleset['recent_edits']
-            end = base_datetime
-            start = end + ruleset['recent_time']
             recent_edits = self.get_contrib_count(limit=limit,
-                                                  start=start,
-                                                  end=end)
+                                                  time=base_datetime,
+                                                  delta=ruleset['recent_time'])
             check_result = recent_edits >= limit
             result['recent_edits_result'] = check_result
             result['recent_edits_value'] = recent_edits
@@ -71,16 +73,14 @@ class ApiRightToVote(RightToVote):
     def __init__(self, user_name, domain):
         self.user_name = user_name
         self.domain = domain
+        self.timezone = pytz.timezone('UTC')
 
         user_data = self.get_user_data(user_name)
         self.user_name = user_data['name']
         self.user_id = user_data['userid']
-        self.user_registration = datetime.datetime.strptime(
-            user_data['registration'],
-            ApiRightToVote.DATE_FORMAT
-        )
+        self.user_registration = self._parse_timestamp(user_data['registration'])
 
-    def get_contrib_count(self, limit, namespaces=[], start=None, end=None):
+    def get_contrib_count(self, limit, namespaces=[], time=None, delta=None):
         args = {'action': 'query',
                 'list': 'usercontribs',
                 'uclimit': limit,
@@ -89,15 +89,19 @@ class ApiRightToVote(RightToVote):
                 'ucdir': 'newer'}
         if len(namespaces) > 0:
             args['ucnamespace'] = '|'.join(namespaces)
-        if start is not None:
-            args['ucstart'] = start.strftime(ApiRightToVote.DATE_FORMAT)
-        if end is not None:
-            args['ucend'] = end.strftime(ApiRightToVote.DATE_FORMAT)
+        if time is not None:
+            args['ucend'] = time.strftime(ApiRightToVote.DATE_FORMAT)
+            if delta is not None:
+                start = time + delta
+                args['ucstart'] = start.strftime(ApiRightToVote.DATE_FORMAT)
         result = self._do_api_request(args)
         return len(result['query']['usercontribs'])
 
     def get_user_name(self):
         return self.user_name
+
+    def get_user_id(self):
+        return self.user_id
 
     def get_registration(self):
         return self.user_registration
@@ -110,8 +114,7 @@ class ApiRightToVote(RightToVote):
                 'ucuser': self.user_name}
         result = self._do_api_request(args)
         timestamp = result['query']['usercontribs'][0]['timestamp']
-        return datetime.datetime.strptime(timestamp,
-                                          ApiRightToVote.DATE_FORMAT)
+        return self._parse_timestamp(timestamp)
 
     def get_user_data(self, user_name):
         args = {'action': 'query',
@@ -128,6 +131,12 @@ class ApiRightToVote(RightToVote):
         response = urllib2.urlopen(url)
         result = response.read()
         return json.loads(result)
+
+    def _parse_timestamp(self, timestamp):
+        return datetime.datetime.strptime(
+                timestamp,
+                ApiRightToVote.DATE_FORMAT,
+        ).replace(tzinfo=self.timezone)
 
 ruleset_de_arbcom = {
     'contrib_count': 400,
