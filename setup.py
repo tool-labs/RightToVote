@@ -13,5 +13,6 @@ distutils.core.setup(
     license='LICENSE',
     long_description=open('README.md').read(),
     install_requires=reqs,
+    scripts=['scripts/righttovotetests.py'],
 )
 
