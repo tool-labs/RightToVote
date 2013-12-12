@@ -8,7 +8,7 @@ distutils.core.setup(
     version='0.1dev',
     author='Robin Krahl',
     author_email='me@robin-krahl.de',
-    packages=['righttovote'],
+    packages=['righttovote', 'righttovote.tests'],
     package_data={'righttovote': ['templates/*.html']},
     license='LICENSE',
     long_description=open('README.md').read(),
