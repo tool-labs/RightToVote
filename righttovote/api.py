@@ -25,6 +25,9 @@ class RightToVote():
         pass
 
     def check_ruleset(self, ruleset, base_datetime=datetime.datetime.now()):
+        if not 'id' in ruleset:
+            raise ValueError('Invalid ruleset: no ID given!')
+        
         result = {}
         rules = []
         checks_result = True
@@ -66,8 +69,18 @@ class RightToVote():
             result['registration_value'] = registration
             checks_result = check_result and checks_result
             rules.append('registration')
+        
+        if 'dependency' in ruleset:
+            dependency = ruleset['dependency']
+            dependency_result = self.check_ruleset(dependency, base_datetime)
+            check_result = dependency_result['result']
+            result['dependency_result'] = check_result
+            result['dependency_value'] = dependency_result
+            checks_result = check_result and checks_result
+            rules.append('dependency')
 
-        result['rules'] = rules
+        result['id'] = ruleset['id']
+        result['rules'] = sorted(rules)
         result['result'] = checks_result
 
         return result
@@ -144,19 +157,25 @@ class ApiRightToVote(RightToVote):
                 ApiRightToVote.DATE_FORMAT,
         ).replace(tzinfo=self.timezone)
 
-ruleset_de_arbcom = {
-    'contrib_count': 400,
-    'first_edit': relativedelta(months=-4),
-}
 
 ruleset_de_admin = {
+    'id': 'de-admin',
     'contrib_count': 200,
     'first_edit': relativedelta(months=-2),
     'recent_edits': 50,
     'recent_time': relativedelta(years=-1),
 }
 
+
+ruleset_de_arbcom = {
+    'id': 'de-arbcom',
+    'contrib_count': 400,
+    'first_edit': relativedelta(months=-4),
+    'dependency': ruleset_de_admin,
+}
+
 ruleset_de_image = {
+    'id': 'de-image',
     'contrib_count': 60,
     'registration': relativedelta(months=-6),
 }
