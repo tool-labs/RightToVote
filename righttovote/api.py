@@ -66,7 +66,7 @@ class RightToVote():
                                                   time=base_datetime,
                                                   delta=time,
                                                   namespaces=namespaces)
-            check_result = recent_edits >= limit
+            check_result = recent_edits >= count
             result['recent_edits_result'] = check_result
             result['recent_edits_value'] = recent_edits
             checks_result = check_result and checks_result
