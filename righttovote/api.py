@@ -176,7 +176,7 @@ ruleset_de_admin = {
     'recent_edits': {
         'count': 50,
         'time': relativedelta(years=-1),
-        'namespaces': [0],
+        'namespaces': ['0'],
     },
 }
 
