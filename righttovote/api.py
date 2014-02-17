@@ -50,11 +50,22 @@ class RightToVote():
             checks_result = check_result and checks_result
             rules.append('contrib_count')
 
-        if 'recent_edits' in ruleset and 'recent_time' in ruleset:
-            limit = ruleset['recent_edits']
-            recent_edits = self.get_contrib_count(limit=limit,
+        if 'recent_edits' in ruleset:
+            rule = ruleset['recent_edits']
+            if not 'count' in rule:
+                raise ValueError('No count for recent_edits rule')
+            if not 'time' in rule:
+                raise ValueError('No time for recent_edits rule')
+            count = rule['count']
+            time = rule['time']
+            namespaces = []
+            if 'namespaces' in rule:
+                namespaces = rule['namespaces']
+            
+            recent_edits = self.get_contrib_count(limit=count,
                                                   time=base_datetime,
-                                                  delta=ruleset['recent_time'])
+                                                  delta=time,
+                                                  namespaces=namespaces)
             check_result = recent_edits >= limit
             result['recent_edits_result'] = check_result
             result['recent_edits_value'] = recent_edits
@@ -162,8 +173,11 @@ ruleset_de_admin = {
     'id': 'de-admin',
     'contrib_count': 200,
     'first_edit': relativedelta(months=-2),
-    'recent_edits': 50,
-    'recent_time': relativedelta(years=-1),
+    'recent_edits': {
+        'count': 50,
+        'time': relativedelta(years=-1),
+        'namespaces': [0],
+    },
 }
 
 
