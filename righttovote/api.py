@@ -43,7 +43,8 @@ class RightToVote():
 
         if 'contrib_count' in ruleset:
             limit = ruleset['contrib_count']
-            contrib_count = self.get_contrib_count(limit=limit)
+            contrib_count = self.get_contrib_count(limit=limit,
+                                                   time=base_datetime)
             check_result = contrib_count >= limit
             result['contrib_count_result'] = check_result
             result['contrib_count_value'] = contrib_count
