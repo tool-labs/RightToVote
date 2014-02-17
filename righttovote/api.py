@@ -26,6 +26,7 @@ class RightToVote():
 
     def check_ruleset(self, ruleset, base_datetime=datetime.datetime.now()):
         result = {}
+        rules = []
         checks_result = True
 
         if 'first_edit' in ruleset:
@@ -35,6 +36,7 @@ class RightToVote():
             result['first_edit_result'] = check_result
             result['first_edit_value'] = first_edit
             checks_result = check_result and checks_result
+            rules.append('first_edit')
 
         if 'contrib_count' in ruleset:
             limit = ruleset['contrib_count']
@@ -43,6 +45,7 @@ class RightToVote():
             result['contrib_count_result'] = check_result
             result['contrib_count_value'] = contrib_count
             checks_result = check_result and checks_result
+            rules.append('contrib_count')
 
         if 'recent_edits' in ruleset and 'recent_time' in ruleset:
             limit = ruleset['recent_edits']
@@ -53,6 +56,7 @@ class RightToVote():
             result['recent_edits_result'] = check_result
             result['recent_edits_value'] = recent_edits
             checks_result = check_result and checks_result
+            rules.append('recent_edits')
 
         if 'registration' in ruleset:
             date = base_datetime + ruleset['registration']
@@ -61,7 +65,9 @@ class RightToVote():
             result['registration_result'] = check_result
             result['registration_value'] = registration
             checks_result = check_result and checks_result
+            rules.append('registration')
 
+        result['rules'] = rules
         result['result'] = checks_result
 
         return result
