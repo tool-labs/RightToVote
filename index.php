@@ -109,13 +109,13 @@ function printResults($forBot,$date,$signup,$firstEdit,$ArbCom,$Admin,$AdminRece
 
   $reasons = array();
   if ($Admin < ADMIN_EDITS)
-    $reasons[] = 'Nur '.$Admin.' von '.ADMIN_EDITS.' Artikel-Bearbeitungen';
+    $reasons[] = $Admin.' von '.ADMIN_EDITS.' Artikel-Bearbeitungen';
   if ($firstEdit > date(TIMESTAMP_FORMAT,strtotime(ADMIN_FIRST_EDIT,$date)))
     $reasons[] = 'Erster Edit am '.$firstEdit[6].$firstEdit[7].'.'.$firstEdit[4].$firstEdit[5].'.'.$firstEdit[0].$firstEdit[1].$firstEdit[2].$firstEdit[3].
                  ' um '.$firstEdit[8].$firstEdit[9].':'.$firstEdit[10].$firstEdit[11].
                  ', vor '.date(DATE_FORMAT,strtotime(ADMIN_FIRST_EDIT,$date)).' benötigt.';
   if ($newSB && ($AdminRecent < ADMIN_RECENT_EDITS))
-    $reasons[] = 'Nur '.$AdminRecent.' von '.ADMIN_RECENT_EDITS.' Artikel-Bearbeitungen seit dem '.
+    $reasons[] = $AdminRecent.' von '.ADMIN_RECENT_EDITS.' Artikel-Bearbeitungen seit dem '.
                  date(DATE_FORMAT,strtotime(ADMIN_RECENT_TIME,$date));
   $AdminOK = empty($reasons);
   if ($forBot)
@@ -133,7 +133,7 @@ function printResults($forBot,$date,$signup,$firstEdit,$ArbCom,$Admin,$AdminRece
   if (!$AdminOK)
     $reasons[] = 'Allgemeine Stimmberechtigung nicht erfüllt';
   if ($ArbCom < ARBCOM_EDITS)
-    $reasons[] = 'Nur '.$ArbCom.' von '.ARBCOM_EDITS.' Bearbeitungen';
+    $reasons[] = $ArbCom.' von '.ARBCOM_EDITS.' Bearbeitungen';
   if ($firstEdit > date(TIMESTAMP_FORMAT,strtotime(ARBCOM_FIRST_EDIT,$date)))
     $reasons[] = 'Erster Edit am '.$firstEdit[6].$firstEdit[7].'.'.$firstEdit[4].$firstEdit[5].'.'.$firstEdit[0].$firstEdit[1].$firstEdit[2].$firstEdit[3].
                  ' um '.$firstEdit[8].$firstEdit[9].':'.$firstEdit[10].$firstEdit[11].
@@ -149,7 +149,7 @@ function printResults($forBot,$date,$signup,$firstEdit,$ArbCom,$Admin,$AdminRece
   $reasons = array();
   $startDate = strtotime(IMAGE_AGE,$date);
   if (($ArbCom < IMAGE_EDITS) && ($signup > date(TIMESTAMP_FORMAT,$startDate)))
-    $reasons[] = 'Nur '.$ArbCom.' von '.IMAGE_EDITS.' Bearbeitungen, und erst seit dem '.
+    $reasons[] = $ArbCom.' von '.IMAGE_EDITS.' Bearbeitungen, und erst seit dem '.
                  $signup[6].$signup[7].'.'.$signup[4].$signup[5].'.'.$signup[0].$signup[1].$signup[2].$signup[3].
                  ' um '.$signup[8].$signup[9].':'.$signup[10].$signup[11].
                  ' dabei (benötigt: '.date(DATE_FORMAT,$startDate).' oder früher)';
