@@ -1,4 +1,5 @@
 <?php
+
 require_once("tools.inc.php"); 
 
 define('ARBCOM_EDITS',             400);
@@ -56,8 +57,9 @@ function printForm()
 function getUserData($name)
 { 
   global $database;
-  $query = $database->prepare('select user_id,user_registration,group_concat(ug_group) as groups '.
+  $query = $database->prepare('select actor_id,user_registration,group_concat(ug_group) as groups '.
                               'from user join user_groups on (ug_user = user_id) '.
+                              'join actor on actor_user = user_id '.
                               'where user_name = ?');
   $query->execute(array(htmlspecialchars_decode($name)));
   return $query->fetch();
@@ -70,7 +72,7 @@ function verifyUserEditCount($user,$start,$end,$allNS,$required)
                               'select rev_id from revision_userindex join page on (page_id = rev_page) '.
                               'where '.
                               ($allNS ? '' : 'page_namespace=0 and ').
-                              'rev_user=? and rev_timestamp between ? and ? '.
+                              'rev_actor=? and rev_timestamp between ? and ? '.
                               'LIMIT '.(integer)$required.') i');
   $query->execute(array($user,date(TIMESTAMP_FORMAT,$start),date(TIMESTAMP_FORMAT,$end)));
   $result = $query->fetch();
@@ -84,7 +86,7 @@ function getFirstEdit($user)
 {
   global $database;
   $query = $database->prepare('select rev_timestamp from revision_userindex '.
-                              'where rev_user=? '.
+                              'where rev_actor=? '.
                               'ORDER BY rev_timestamp ASC LIMIT 1');
   $query->execute(array($user));
   $result = $query->fetch();
@@ -186,7 +188,7 @@ if (!empty($user))
 {
   $database = connectDB();
   $udata = getUserData($user);
-  $uid = $udata['user_id'];
+  $uid = $udata['actor_id'];
 
   if (empty($uid))
   {
@@ -235,5 +237,6 @@ if (!$forBot)
   echo('</p>');
   print_footer('Modifiziert von <a href="http://de.wikipedia.org/wiki/Benutzer:Guandalug">Guandalug</a> und <a href="http://de.wikipedia.org/wiki/Benutzer:Ireas">ireas</a> nach einem Skript von <a href="http://tools.wikimedia.de/~gunther/">Gunther</a>. Veröffentlicht unter der <a href="http://www.opensource.org/licenses/mit-license.php">MIT-Lizenz</a> auf <a href="https://github.com/tool-labs/stimmberechtigung">GitHub</a>.');
 }
+
 ?>
 
