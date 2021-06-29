@@ -39,8 +39,8 @@ function printForm()
    <p><label>Tag:&nbsp;<input type="number" name="day" value="'.getVar('day', date('d')).'" size="2" maxlength="2"></label>&nbsp;
       <label>Monat:&nbsp;<input type="number" name="mon" value="'.getVar('mon', date('m')).'" size="2" maxlength="2" /></label>&nbsp;
       <label>Jahr:&nbsp;<input type="number" name="year" value="'.getVar('year', date('Y')).'" size="4" maxlength="4" /></label>&nbsp;
-      <label>Uhrzeit:&nbsp;<input type="date" name="hour" value="'.getVar('hour', date('H')).'" size="2" maxlegth="2" />&nbsp;:&nbsp;
-                           <input type="date" name="min" value="'.getVar('min', date('i')).'" size="2" maxlength="2" /></label></p>
+      <label>Uhrzeit:&nbsp;<input type="number" name="hour" value="'.getVar('hour', date('H')).'" size="2" maxlegth="2" />&nbsp;:&nbsp;
+                           <input type="number" name="min" value="'.getVar('min', date('i')).'" size="2" maxlength="2" /></label></p>
    <p style="font-size:smaller;">Bitte die Uhrzeit als <a href="https://de.wikipedia.org/wiki/Koordinierte_Weltzeit">koordinierte Weltzeit (UTC)</a> eintragen. 
      UTC ist hierbei im Sommer (MESZ / CEST) 2, im Winter (MEZ / CET) 1 Stunde zurück.<br />
      &nbsp;<br />
