@@ -41,7 +41,7 @@ function print_header($lang,$title)
 <head>
  <meta charset="UTF-8" />
  <title>'.$title.'</title></head><body>
- <link rel="stylesheet" type="text/css" href="/style.css" />
+ <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
 ');
