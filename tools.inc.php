@@ -41,7 +41,7 @@ function print_header($lang,$title)
 <head>
  <meta charset="UTF-8" />
  <title>'.$title.'</title></head><body>
- <link rel="stylesheet" type="text/css" href="/style.css">
+ <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 ');
@@ -51,7 +51,7 @@ function print_footer($text)
 {
  echo('<hr />
   <div style="float:left;font-size:70%;">'.$text.'</div>
-  <a href="https://tools.wmflabs.org"><img style="float:right;" id="poweredbyicon" src="/stimmberechtigung/powered-by-labs.png" title="Powered by Wikimedia Tool Labs" /></a>
+  <a href="https://tools.wmflabs.org"><img style="float:right;" id="poweredbyicon" src="powered-by-labs.png" title="Powered by Wikimedia Tool Labs" /></a>
   </div>
 </body>
 </html>
