@@ -36,11 +36,11 @@ function printForm()
   echo
   '<form method="get" action=""> 
    <p><label>Benutzer:&nbsp;<input type="text" name="user" value="' . getVar('user','').'"></label></p>
-   <p><label>Tag:&nbsp;<input type="number" name="day" value="'.getVar('day', date('d')).'" size="2" maxlength="2"></label>&nbsp;
-      <label>Monat:&nbsp;<input type="number" name="mon" value="'.getVar('mon', date('m')).'" size="2" maxlength="2" /></label>&nbsp;
-      <label>Jahr:&nbsp;<input type="number" name="year" value="'.getVar('year', date('Y')).'" size="4" maxlength="4" /></label>&nbsp;
-      <label>Uhrzeit:&nbsp;<input type="number" name="hour" value="'.getVar('hour', date('H')).'" size="2" maxlegth="2" />&nbsp;:&nbsp;
-                           <input type="number" name="min" value="'.getVar('min', date('i')).'" size="2" maxlength="2" /></label></p>
+   <p><label>Tag:&nbsp;<input type="number" name="day" value="'.getVar('day', date('d')).'" size="2" min="1" maxlength="2"></label>&nbsp;
+      <label>Monat:&nbsp;<input type="number" name="mon" value="'.getVar('mon', date('m')).'" size="2" min="1" maxlength="2" /></label>&nbsp;
+      <label>Jahr:&nbsp;<input type="number" name="year" value="'.getVar('year', date('Y')).'" size="4" min="2001" maxlength="4" /></label>&nbsp;
+      <label>Uhrzeit:&nbsp;<input type="number" name="hour" value="'.getVar('hour', date('H')).'" size="2" min="0" maxlegth="2" />&nbsp;:&nbsp;
+                           <input type="number" name="min" value="'.getVar('min', date('i')).'" size="2" mmin="0" axlength="2" /></label></p>
    <p style="font-size:smaller;">Bitte die Uhrzeit als <a href="https://de.wikipedia.org/wiki/Koordinierte_Weltzeit">koordinierte Weltzeit (UTC)</a> eintragen. 
      UTC ist hierbei im Sommer (MESZ / CEST) 2, im Winter (MEZ / CET) 1 Stunde zurück.<br />
      &nbsp;<br />
